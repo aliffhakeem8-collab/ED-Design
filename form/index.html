@@ -219,24 +219,16 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
 }
-.card-icon {
-  width: 32px;
-  height: 32px;
-  background: var(--accent);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
-}
+.card-icon { display: none; }
 .card-title {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text2);
+  color: var(--text);
 }
 
 /* ── Fields ── */
@@ -385,6 +377,159 @@ body {
 }
 .thankyou h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
 .thankyou p { font-size: 15px; color: var(--text2); line-height: 1.7; }
+
+/* ── AI Assistant ── */
+.ai-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #1f1e17 100%);
+  border: 1px solid #3a3820;
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.ai-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #ff9f43, var(--accent));
+}
+.ai-card-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #3a3820;
+}
+.ai-badge {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(247,193,45,0.12);
+  border: 1px solid rgba(247,193,45,0.25);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ai-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.ai-card-title {
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text);
+}
+.ai-card-sub {
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.ai-prompts {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  margin-bottom: 1rem;
+}
+.ai-prompt-chip {
+  font-family: var(--font);
+  font-size: 12px; padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #3a3820;
+  cursor: pointer; color: var(--text2);
+  background: rgba(247,193,45,0.05);
+  transition: all 0.12s;
+  text-align: left;
+}
+.ai-prompt-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(247,193,45,0.1);
+}
+.ai-input-row {
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.ai-input-row textarea {
+  flex: 1;
+  font-family: var(--font);
+  font-size: 14px; color: var(--text);
+  background: #111;
+  border: 1px solid #3a3820;
+  border-radius: 10px;
+  padding: 10px 13px;
+  resize: none; line-height: 1.5;
+  transition: border-color 0.15s;
+  min-height: 60px;
+}
+.ai-input-row textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(247,193,45,0.1);
+}
+.ai-input-row textarea::placeholder { color: var(--text3); }
+.ai-send-btn {
+  flex-shrink: 0;
+  font-family: var(--font);
+  font-size: 13px; font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--accent); color: #0f0f0f;
+  border: none; cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+.ai-send-btn:hover { background: var(--accent-dark); }
+.ai-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ai-response {
+  display: none;
+  margin-top: 1rem;
+  background: #111;
+  border: 1px solid #3a3820;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+.ai-response-header {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.ai-response-text {
+  font-size: 14px; color: var(--text2);
+  line-height: 1.7; white-space: pre-wrap;
+}
+.ai-copy-btn {
+  font-family: var(--font);
+  font-size: 12px; color: var(--text3);
+  background: none; border: 1px solid var(--border2);
+  border-radius: 6px; padding: 5px 10px;
+  cursor: pointer; margin-top: 10px;
+  transition: all 0.12s;
+}
+.ai-copy-btn:hover { color: var(--text); border-color: var(--text2); }
+.ai-loading {
+  display: none;
+  align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text2);
+  margin-top: 10px;
+}
+.ai-loading-dots span {
+  display: inline-block;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1.2s infinite;
+  margin: 0 2px;
+}
+.ai-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ai-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -405,7 +550,7 @@ body {
     </div>
     <div class="dropdown-wrap">
       <button class="dropdown-btn" id="dropbtn" onclick="toggleDropdown()">
-        Get In Touch <span class="arrow">▾</span>
+        Get in touch <span class="arrow">▾</span>
       </button>
       <div class="dropdown-menu" id="dropmenu">
         <div class="menu-header">Choose how to connect</div>
@@ -462,22 +607,22 @@ body {
       </div>
       <div class="two-col">
         <div class="field">
-          <label>Your Name <span class="req">*</span></label>
-          <input type="text" name="name" placeholder="Muhd Ali" required />
+          <label>Your name <span class="req">*</span></label>
+          <input type="text" name="name" placeholder="Jane Smith" required />
         </div>
         <div class="field">
-          <label>Company/Project <span class="req">*</span></label>
-          <input type="text" name="company" placeholder="Kopi Sdn. Bhd." required />
+          <label>Company / project <span class="req">*</span></label>
+          <input type="text" name="company" placeholder="Acme Co." required />
         </div>
       </div>
       <div class="two-col">
         <div class="field">
-          <label>Email Address <span class="req">*</span></label>
-          <input type="email" name="email" placeholder="youremail@gmail.com" required />
+          <label>Email address <span class="req">*</span></label>
+          <input type="email" name="email" placeholder="jane@acme.com" required />
         </div>
         <div class="field">
-          <label>Phone <span style="color:var(--text3);font-weight:400;">(Optional)</span></label>
-          <input type="tel" name="phone" placeholder="+6012 345 6789" />
+          <label>Phone <span style="color:var(--text3);font-weight:400;">(optional)</span></label>
+          <input type="tel" name="phone" placeholder="+1 555 000 0000" />
         </div>
       </div>
     </div>
@@ -489,20 +634,20 @@ body {
         <div class="card-title">Project Details</div>
       </div>
       <div class="field">
-        <label>Type of Design Needed <span class="req">*</span></label>
+        <label>Type of design needed <span class="req">*</span></label>
         <div class="chips" id="chips-types">
           <div class="chip" data-value="Logo">Logo</div>
-          <div class="chip" data-value="Brand identity">Brand Identity</div>
-          <div class="chip" data-value="Business card">Business Card</div>
-          <div class="chip" data-value="Social media graphics">Social Media</div>
-          <div class="chip" data-value="Flyer / poster">Flyer/Poster</div>
+          <div class="chip" data-value="Brand identity">Brand identity</div>
+          <div class="chip" data-value="Business card">Business card</div>
+          <div class="chip" data-value="Social media graphics">Social media</div>
+          <div class="chip" data-value="Flyer / poster">Flyer / poster</div>
           <div class="chip" data-value="Packaging">Packaging</div>
           <div class="chip" data-value="Other">Other</div>
         </div>
       </div>
       <hr class="divider" />
       <div class="field">
-        <label>Industry/Niche</label>
+        <label>Industry / niche</label>
         <input type="text" name="industry" placeholder="e.g. tech startup, coffee shop, fitness, law firm…" />
       </div>
       <div class="field">
@@ -526,8 +671,8 @@ body {
         <div class="chips" id="chips-style">
           <div class="chip" data-value="Modern & minimal">Modern & Minimal</div>
           <div class="chip" data-value="Bold & energetic">Bold & Energetic</div>
-          <div class="chip" data-value="Elegant & luxury">Elegant & Luxury</div>
-          <div class="chip" data-value="Playful & fun">Playful & Fun</div>
+          <div class="chip" data-value="Elegant & luxury">Elegant & luxury</div>
+          <div class="chip" data-value="Playful & fun">Playful & fun</div>
           <div class="chip" data-value="Vintage / retro">Vintage/Retro</div>
           <div class="chip" data-value="Technical / corporate">Corporate</div>
           <div class="chip" data-value="Organic / natural">Organic/Natural</div>
@@ -553,7 +698,7 @@ body {
         <input type="text" name="color_notes" placeholder="Specific hex codes or color descriptions…" style="margin-top:9px;" />
       </div>
       <div class="field">
-        <label>Colors or styles to avoid</label>
+        <label>Colours or Styles to avoid</label>
         <input type="text" name="avoid" placeholder="e.g. no neon, avoid red, nothing too corporate…" />
       </div>
     </div>
@@ -565,7 +710,7 @@ body {
         <div class="card-title">Content & Text</div>
       </div>
       <div class="field">
-        <label>Text/Wording to include</label>
+        <label>Text / wording to include</label>
         <textarea name="wording" rows="2" placeholder="Company name, tagline, slogan, contact info…"></textarea>
       </div>
       <div class="field">
@@ -574,7 +719,7 @@ body {
           <option value="">— select one —</option>
           <option>No — starting from scratch</option>
           <option>Yes — I will share files separately</option>
-          <option>Yes — please redesign/refresh existing</option>
+          <option>Yes — please redesign / refresh existing</option>
         </select>
       </div>
     </div>
@@ -614,7 +759,7 @@ body {
             <div class="chip" data-value="PNG">PNG</div>
             <div class="chip" data-value="SVG">SVG</div>
             <div class="chip" data-value="PDF">PDF</div>
-            <div class="chip" data-value="AI / EPS">AI/EPS</div>
+            <div class="chip" data-value="AI / EPS">AI / EPS</div>
           </div>
         </div>
         <div class="field">
@@ -629,12 +774,46 @@ body {
         <select name="budget">
           <option value="">— select one —</option>
           <option>Under RM 300</option>
-          <option>RM 300 – RM 1,000</option>
+          <option>RM 500 – RM 1,000</option>
           <option>RM 1,000 – RM 2,500</option>
           <option>RM 2,500 – RM 5,000</option>
           <option>RM 5,000+</option>
           <option>Let's discuss</option>
         </select>
+      </div>
+    </div>
+
+
+    <!-- AI Design Assistant -->
+    <div class="ai-card">
+      <div class="ai-card-header">
+        <div class="ai-badge"><div class="ai-badge-dot"></div> AI Powered</div>
+        <div class="ai-card-title">Design Brief Assistant</div>
+      </div>
+      <p class="ai-card-sub">Not sure how to describe what you want? Tell our AI assistant in plain words — it'll help you put your vision into words you can copy into the form.</p>
+
+      <div class="ai-prompts">
+        <button type="button" class="ai-prompt-chip" onclick="setPrompt('I want a logo for my business but I don\'t know what style to pick')">🤷 I don't know what style I want</button>
+        <button type="button" class="ai-prompt-chip" onclick="setPrompt('What colors would work well for a modern tech brand?')">🎨 Help me pick colors</button>
+        <button type="button" class="ai-prompt-chip" onclick="setPrompt('I want something that looks premium and luxurious but not too corporate')">✨ I want it to look premium</button>
+        <button type="button" class="ai-prompt-chip" onclick="setPrompt('I run a local food business and need a fun, friendly logo')">🍜 I have a food business</button>
+        <button type="button" class="ai-prompt-chip" onclick="setPrompt('Can you suggest what to put in my design brief? My business is: ')">📝 Help me write my brief</button>
+      </div>
+
+      <div class="ai-input-row">
+        <textarea id="ai-input" rows="2" placeholder="Describe your business or what you're looking for… e.g. 'I sell handmade candles and want something warm and cozy'"></textarea>
+        <button type="button" class="ai-send-btn" id="ai-btn" onclick="askAI()">Ask AI ✦</button>
+      </div>
+
+      <div class="ai-loading" id="ai-loading">
+        <div class="ai-loading-dots"><span></span><span></span><span></span></div>
+        Thinking…
+      </div>
+
+      <div class="ai-response" id="ai-response">
+        <div class="ai-response-header">✦ AI Suggestion</div>
+        <div class="ai-response-text" id="ai-response-text"></div>
+        <button type="button" class="ai-copy-btn" onclick="copyToNotes()">Copy to "Anything else" field ↓</button>
       </div>
     </div>
 
@@ -738,6 +917,77 @@ body {
       err.style.display = 'block';
     }
   });
+
+  // ── AI Assistant ──
+  function setPrompt(text) {
+    const input = document.getElementById('ai-input');
+    input.value = text;
+    input.focus();
+    input.setSelectionRange(text.length, text.length);
+  }
+
+  async function askAI() {
+    const input = document.getElementById('ai-input');
+    const btn = document.getElementById('ai-btn');
+    const loading = document.getElementById('ai-loading');
+    const responseBox = document.getElementById('ai-response');
+    const responseText = document.getElementById('ai-response-text');
+
+    const userMsg = input.value.trim();
+    if (!userMsg) { input.focus(); return; }
+
+    btn.disabled = true;
+    btn.textContent = '…';
+    loading.style.display = 'flex';
+    responseBox.style.display = 'none';
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: userMsg
+          }],
+          system: `You are a helpful design brief assistant for a graphic design studio called Eclipse Design. 
+Your job is to help clients who are unsure about what they want — translate their vague ideas into clear, actionable design brief language.
+
+When a client describes their business or style preferences:
+- Suggest 2-3 specific style directions (e.g. minimalist modern, bold retro, soft organic)
+- Recommend color palettes with specific color names or hex codes
+- Suggest mood keywords (e.g. trustworthy, energetic, luxurious, playful)
+- Give 1-2 reference brand examples they might look up for inspiration
+- Keep it friendly, clear and concise — no more than 150 words
+- Format with short bullet points for easy reading`
+        })
+      });
+
+      const data = await res.json();
+      const text = data.content?.[0]?.text || 'Sorry, could not get a response. Please try again.';
+      responseText.textContent = text;
+      responseBox.style.display = 'block';
+    } catch(e) {
+      responseText.textContent = 'Something went wrong. Please check your connection and try again.';
+      responseBox.style.display = 'block';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Ask AI ✦';
+    loading.style.display = 'none';
+  }
+
+  function copyToNotes() {
+    const aiText = document.getElementById('ai-response-text').textContent;
+    const notesField = document.querySelector('textarea[name="notes"]');
+    if (notesField) {
+      notesField.value = (notesField.value ? notesField.value + '\n\n' : '') + '--- AI Brief Suggestion ---\n' + aiText;
+      notesField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      notesField.focus();
+    }
+  }
 </script>
 </body>
 </html>
